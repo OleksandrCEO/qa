@@ -68,7 +68,7 @@ export const qaAPI = {
 
   async create(data: CreateQARecord, username: string, password: string): Promise<QARecord> {
     try {
-      const response = await fetch(`${BASE_URL}/`, {
+      const response = await fetch(`${BASE_URL}/create`, {
         method: 'POST',
         headers: createAuthHeaders(username, password),
         body: JSON.stringify(data),
@@ -87,7 +87,7 @@ export const qaAPI = {
 
   async update(data: UpdateQARecord, username: string, password: string): Promise<QARecord> {
     try {
-      const response = await fetch(`${BASE_URL}/`, {
+      const response = await fetch(`${BASE_URL}/update`, {
         method: 'PATCH',
         headers: createAuthHeaders(username, password),
         body: JSON.stringify(data),
@@ -106,8 +106,8 @@ export const qaAPI = {
 
   async delete(id: string, username: string, password: string): Promise<void> {
     try {
-      const response = await fetch(`${BASE_URL}/?id=${encodeURIComponent(id)}`, {
-        method: 'GET',
+      const response = await fetch(`${BASE_URL}/delete?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
         headers: createAuthHeaders(username, password),
       });
 
