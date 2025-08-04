@@ -58,12 +58,12 @@ const QAListPage: React.FC = () => {
       if (err.status === 401) {
         toast({
           variant: "destructive",
-          title: "Session expired",
-          description: "Please log in again."
+                  title: "Сесія закінчилася",
+                  description: "Будь ласка, увійдіть знову."
         });
         logout();
       } else {
-        setError(err.message || 'Failed to load records');
+        setError(err.message || 'Не вдалося завантажити записи');
       }
     } finally {
       setIsLoading(false);
@@ -99,16 +99,16 @@ const QAListPage: React.FC = () => {
       await qaAPI.delete(recordToDelete.id, credentials.username, credentials.password);
       setRecords(prev => prev.filter(r => r.id !== recordToDelete.id));
       toast({
-        title: "Success",
-        description: "Record deleted successfully."
+        title: "Успішно",
+        description: "Запис видалено успішно."
       });
       setIsDeleteOpen(false);
       setRecordToDelete(null);
     } catch (err: any) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: err.message || "Failed to delete record."
+        title: "Помилка",
+        description: err.message || "Не вдалося видалити запис."
       });
     } finally {
       setIsDeletingRecord(false);
@@ -124,7 +124,7 @@ const QAListPage: React.FC = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Loading Q&A records...</p>
+          <p className="text-muted-foreground">Завантаження записів...</p>
         </div>
       </div>
     );
@@ -138,7 +138,7 @@ const QAListPage: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
               <MessageSquareQuote className="w-8 h-8 text-primary" />
-              <h1 className="text-xl font-semibold text-foreground">QA Admin Panel</h1>
+              <h1 className="text-xl font-semibold text-foreground hidden sm:block">Панель адміністратора</h1>
             </div>
             
             <div className="flex items-center space-x-3">
@@ -149,7 +149,7 @@ const QAListPage: React.FC = () => {
                 disabled={isLoading}
               >
                 <RefreshCw className="w-4 h-4 mr-2" />
-                Refresh
+                Оновити
               </Button>
               
               <Button
@@ -158,7 +158,7 @@ const QAListPage: React.FC = () => {
                 onClick={logout}
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                Sign Out
+                Вийти
               </Button>
             </div>
           </div>
@@ -172,7 +172,7 @@ const QAListPage: React.FC = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Search questions or answers..."
+              placeholder="Пошук запитань або відповідей..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -184,7 +184,7 @@ const QAListPage: React.FC = () => {
             className="sm:w-auto"
           >
             <Plus className="w-4 h-4 mr-2" />
-            Add New QA
+            Додати нове
           </Button>
         </div>
 
@@ -213,7 +213,7 @@ const QAListPage: React.FC = () => {
                 {!searchTerm && (
                   <Button onClick={() => navigate('/add')}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add New QA
+                    Додати нове
                   </Button>
                 )}
               </CardContent>
@@ -244,7 +244,7 @@ const QAListPage: React.FC = () => {
                         className="hover:bg-primary hover:text-primary-foreground"
                       >
                         <Edit className="w-4 h-4" />
-                        <span className="ml-2 hidden sm:inline">Edit</span>
+                        <span className="ml-2 hidden sm:inline">Редагувати</span>
                       </Button>
                       
                       <Button
@@ -254,7 +254,7 @@ const QAListPage: React.FC = () => {
                         className="hover:bg-destructive hover:text-destructive-foreground"
                       >
                         <Trash2 className="w-4 h-4" />
-                        <span className="ml-2 hidden sm:inline">Delete</span>
+                        <span className="ml-2 hidden sm:inline">Видалити</span>
                       </Button>
                     </div>
                   </div>
@@ -268,9 +268,9 @@ const QAListPage: React.FC = () => {
         {filteredRecords.length > 0 && (
           <div className="mt-6 text-center text-sm text-muted-foreground">
             {searchTerm ? (
-              <>Showing {filteredRecords.length} of {records.length} records</>
+              <>Показано {filteredRecords.length} з {records.length} записів</>
             ) : (
-              <>{records.length} total records</>
+              <>{records.length} загалом записів</>
             )}
           </div>
         )}

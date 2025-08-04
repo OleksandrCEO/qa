@@ -42,21 +42,21 @@ const QAFormPage: React.FC = () => {
         })
         .catch((err: any) => {
           if (err.status === 401) {
-            toast({
-              variant: "destructive",
-              title: "Session expired",
-              description: "Please log in again."
-            });
+        toast({
+          variant: "destructive",
+          title: "Сесія закінчилася",
+          description: "Будь ласка, увійдіть знову."
+        });
             logout();
           } else if (err.status === 404) {
-            toast({
-              variant: "destructive",
-              title: "Record not found",
-              description: "The requested Q&A record could not be found."
-            });
+        toast({
+          variant: "destructive",
+          title: "Запис не знайдено",
+          description: "Запитуваний запис не знайдено."
+        });
             navigate('/');
           } else {
-            setError(err.message || 'Failed to load record');
+            setError(err.message || 'Не вдалося завантажити запис');
           }
         })
         .finally(() => {
@@ -72,8 +72,8 @@ const QAFormPage: React.FC = () => {
     if (!formData.question.trim() || !formData.answer.trim()) {
       toast({
         variant: "destructive",
-        title: "Validation Error",
-        description: "Both question and answer are required."
+        title: "Помилка валідації",
+        description: "Запитання та відповідь є обов'язковими."
       });
       return;
     }
@@ -89,8 +89,8 @@ const QAFormPage: React.FC = () => {
           credentials.password
         );
         toast({
-          title: "Success",
-          description: "Q&A record updated successfully."
+          title: "Успішно",
+          description: "Запис оновлено успішно."
         });
       } else {
         await qaAPI.create(
@@ -99,8 +99,8 @@ const QAFormPage: React.FC = () => {
           credentials.password
         );
         toast({
-          title: "Success",
-          description: "Q&A record created successfully."
+          title: "Успішно",
+          description: "Запис створено успішно."
         });
       }
       
@@ -109,12 +109,12 @@ const QAFormPage: React.FC = () => {
       if (err.status === 401) {
         toast({
           variant: "destructive",
-          title: "Session expired",
-          description: "Please log in again."
+          title: "Сесія закінчилася",
+          description: "Будь ласка, увійдіть знову."
         });
         logout();
       } else {
-        setError(err.message || `Failed to ${isEditing ? 'update' : 'create'} record`);
+        setError(err.message || `Не вдалося ${isEditing ? 'оновити' : 'створити'} запис`);
       }
     } finally {
       setIsSaving(false);
@@ -130,7 +130,7 @@ const QAFormPage: React.FC = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Loading record...</p>
+          <p className="text-muted-foreground">Завантаження запису...</p>
         </div>
       </div>
     );
@@ -148,7 +148,7 @@ const QAFormPage: React.FC = () => {
               className="mr-4"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to List
+              Назад до списку
             </Button>
             
             <div className="flex items-center space-x-3">
@@ -158,7 +158,7 @@ const QAFormPage: React.FC = () => {
                 <Plus className="w-6 h-6 text-primary" />
               )}
               <h1 className="text-xl font-semibold text-foreground">
-                {isEditing ? 'Edit Q&A Record' : 'Add New Q&A Record'}
+                {isEditing ? 'Редагувати запис' : 'Додати новий запис'}
               </h1>
             </div>
           </div>
@@ -170,7 +170,7 @@ const QAFormPage: React.FC = () => {
         <Card>
           <CardHeader>
             <CardTitle>
-              {isEditing ? 'Edit Q&A Record' : 'Create New Q&A Record'}
+              {isEditing ? 'Редагувати запис' : 'Створити новий запис'}
             </CardTitle>
           </CardHeader>
           
@@ -183,35 +183,35 @@ const QAFormPage: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="question">Question *</Label>
+                <Label htmlFor="question">Запитання *</Label>
                 <Input
                   id="question"
                   value={formData.question}
                   onChange={(e) => setFormData(prev => ({ ...prev, question: e.target.value }))}
-                  placeholder="Enter the question..."
+                  placeholder="Введіть запитання..."
                   required
                   disabled={isSaving}
                   maxLength={500}
                 />
                 <p className="text-xs text-muted-foreground">
-                  {formData.question.length}/500 characters
+                  {formData.question.length}/500 символів
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="answer">Answer *</Label>
+                <Label htmlFor="answer">Відповідь *</Label>
                 <Textarea
                   id="answer"
                   value={formData.answer}
                   onChange={(e) => setFormData(prev => ({ ...prev, answer: e.target.value }))}
-                  placeholder="Enter the answer..."
+                  placeholder="Введіть відповідь..."
                   required
                   disabled={isSaving}
                   className="min-h-[200px] resize-y"
                   maxLength={5000}
                 />
                 <p className="text-xs text-muted-foreground">
-                  {formData.answer.length}/5000 characters
+                  {formData.answer.length}/5000 символів
                 </p>
               </div>
 
@@ -224,12 +224,12 @@ const QAFormPage: React.FC = () => {
                   {isSaving ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      {isEditing ? 'Updating...' : 'Creating...'}
+                      {isEditing ? 'Оновлення...' : 'Створення...'}
                     </>
                   ) : (
                     <>
                       <Save className="w-4 h-4 mr-2" />
-                      {isEditing ? 'Update Record' : 'Create Record'}
+                      {isEditing ? 'Оновити запис' : 'Створити запис'}
                     </>
                   )}
                 </Button>
@@ -241,7 +241,7 @@ const QAFormPage: React.FC = () => {
                   disabled={isSaving}
                   className="sm:order-1"
                 >
-                  Cancel
+                  Скасувати
                 </Button>
               </div>
             </form>

@@ -27,22 +27,22 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
     <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete Q&A Record</AlertDialogTitle>
+          <AlertDialogTitle>Видалити запис</AlertDialogTitle>
           <AlertDialogDescription className="space-y-2">
-            <span>Are you sure you want to delete this record? This action cannot be undone.</span>
+            <span>Ви впевнені, що хочете видалити цей запис? Цю дію неможливо скасувати.</span>
             <div className="mt-3 p-3 bg-muted rounded border">
-              <strong>Question:</strong> {truncatedQuestion}
+              <strong>Запитання:</strong> {truncatedQuestion}
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isLoading}>Скасувати</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             disabled={isLoading}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            {isLoading ? 'Deleting...' : 'Delete'}
+            {isLoading ? 'Видалення...' : 'Видалити'}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

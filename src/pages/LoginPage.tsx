@@ -26,9 +26,9 @@ const LoginPage: React.FC = () => {
       login(username, password);
     } catch (err: any) {
       if (err.status === 401) {
-        setError('Invalid username or password');
+        setError('Неправильне ім\'я користувача або пароль');
       } else {
-        setError('Unable to connect to server. Please try again.');
+        setError('Не вдається підключитися до сервера. Спробуйте ще раз.');
       }
     } finally {
       setIsLoading(false);
@@ -43,9 +43,9 @@ const LoginPage: React.FC = () => {
             <Shield className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-semibold">QA Admin Panel</CardTitle>
+            <CardTitle className="text-2xl font-semibold">Панель адміністратора</CardTitle>
             <CardDescription className="mt-2">
-              Sign in to manage your Q&A database
+              Увійдіть для управління базою питань і відповідей
             </CardDescription>
           </div>
         </CardHeader>
@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
             )}
             
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username">Ім'я користувача</Label>
               <Input
                 id="username"
                 type="text"
@@ -66,13 +66,13 @@ const LoginPage: React.FC = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 disabled={isLoading}
-                placeholder="Enter your username"
+                placeholder="Введіть ім'я користувача"
                 autoComplete="username"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Пароль</Label>
               <Input
                 id="password"
                 type="password"
@@ -80,7 +80,7 @@ const LoginPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
-                placeholder="Enter your password"
+                placeholder="Введіть пароль"
                 autoComplete="current-password"
               />
             </div>
@@ -93,10 +93,10 @@ const LoginPage: React.FC = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Signing in...
+                  Вхід...
                 </>
               ) : (
-                'Sign In'
+                'Увійти'
               )}
             </Button>
           </form>

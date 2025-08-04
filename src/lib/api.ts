@@ -106,10 +106,9 @@ export const qaAPI = {
 
   async delete(id: string, username: string, password: string): Promise<void> {
     try {
-      const response = await fetch(`${BASE_URL}/`, {
+      const response = await fetch(`${BASE_URL}/?id=${encodeURIComponent(id)}`, {
         method: 'DELETE',
         headers: createAuthHeaders(username, password),
-        body: JSON.stringify({ id }),
       });
 
       if (!response.ok) {
